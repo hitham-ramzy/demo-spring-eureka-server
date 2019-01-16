@@ -18,3 +18,4 @@ Then run:
 To close docker container, Please run:
     
     docker-compose -f src/main/docker/app.yml down
+    
