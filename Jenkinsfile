@@ -2,22 +2,29 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build Stage') {
             steps {
                 echo 'Compiling..'
                 sh "mvn clean compile"
             }
         }
-        stage('Test') {
+        stage('Test Stage') {
             steps {
                 echo 'Testing..'
                 sh "mvn test"
             }
         }
-        stage('Deploy') {
+        stage('Package Stage') {
             steps {
-                echo 'Deploying....'
-                sh "mvn deploy"
+                echo 'Packaging....'
+                sh "mvn package"
+                archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
+            }
+        }
+        stage('Run Stage') {
+            steps {
+                echo 'Running....'
+                sh "/home/hitham/hitham/private_projects/deployments/shell_demo.sh"
             }
         }
     }
