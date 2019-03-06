@@ -18,7 +18,6 @@ pipeline {
             steps {
                 echo 'Packaging....'
                 sh "mvn package"
-                archiveArtifacts artifacts: '**/target/*.war', fingerprint: true
             }
         }
         stage('Run Stage') {
